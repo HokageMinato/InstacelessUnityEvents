@@ -1,9 +1,8 @@
 {
-    "name": "Character",
+    "name": "Test",
     "rootNamespace": "",
     "references": [
-        "GUID:11a2306c728a4b843a652ec6c2f142bc",
-        "GUID:7cc05fe3a5833034c974cec7c8411f90"
+        "GUID:11a2306c728a4b843a652ec6c2f142bc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

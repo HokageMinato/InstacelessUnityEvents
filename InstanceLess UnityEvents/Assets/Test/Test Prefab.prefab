@@ -30,11 +30,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5601892661534987629}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &5114155013954137296
 LineRenderer:
-  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,20 +119,16 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
-  m_ApplyActiveColorSpace: 1
 --- !u!1 &7987432673066815318
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +143,7 @@ GameObject:
   - component: {fileID: 6068166393167060455}
   - component: {fileID: 5092855496300317335}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Test Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +163,7 @@ Transform:
   m_Children:
   - {fileID: 3880164588214098649}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2917232450357449630
 MeshFilter:
@@ -228,17 +223,9 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7987432673066815318}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5092855496300317335
@@ -254,11 +241,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalComputations: 0
-  szcb:
-    _target: {fileID: 5092855496300317335}
+  funcBindingTest:
+    _target: {fileID: 0}
+    _methodName: GetRoundedValue
+    _args:
+    - boolValue: 0
+      intValue: 0
+      floatValue: 0
+      stringValue: 
+      objectValue: {fileID: 0}
+      argType: 5
+      _typeName: TestExec, Character, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _typeName: MethodBinding.Runtime.FuncBinding`3[[TestExec, Character, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null],[System.Single, mscorlib, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089],[TestExec, Character, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null]], MethodBinding.Runtime, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    dirty: 0
+  actionBindingTest:
+    _target: {fileID: 0}
     _methodName: 
     _args: []
-    _dynamic: 0
-    _typeName: TestExec+VectorSerizCallback, Character, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    _typeName: MethodBinding.Runtime.ActionBinding`1[[TestExec, Character, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null]], MethodBinding.Runtime, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     dirty: 0
+  val: 0
+  ve:
+    m_PersistentCalls:
+      m_Calls: []
