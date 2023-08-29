@@ -2,8 +2,6 @@
 An instanceless delegate binder which lets you assign function in editor without requiring instance at the time and providing ability to late initialize the event with target invoker.
 
 
-
-
 Pros:
 - Insanely Fast compared UnityEvents, Serializable Callback with near performance to native delegates.
 - Allows binding instance latey and lets you assign function at edit time without requiring instance.
