@@ -5,19 +5,19 @@ using UnityEngine.Events;
 using MethodBinding.Runtime;
 
 [Serializable]
-public class VectorUnityEvent : UnityEvent<TestExec> { }
+public class VectorUnityEvent : UnityEvent<Tests> { }
 
 //[Serializable]
 //public class VectorUnityEventSz : SerializableCallback<TestExec,float> { }
 
-public class TestExec : MonoBehaviour
+public class Tests : MonoBehaviour
 {
     
     public int totalComputations;
 
-   
-    
-    public ActionBinding<TestExec> actionBindingTest;
+    public FuncBinding<Tests, float, Tests> funcBindingTest;
+
+    public ActionBinding<Tests> actionBindingTest;
 
 
     public float val;
@@ -28,16 +28,15 @@ public class TestExec : MonoBehaviour
     //public VectorUnityEventSz vez2;
 
         
-    public float GetRoundedValue(TestExec objARg)
+    public float GetRoundedValue(Tests objARg)
     {
         return objARg.GetHashCode();
     }
 
-    
+    public float GetRawValue(Tests objARg) { return 0f; }
 
     public void GetRounderdwrapper() { GetRoundedValue(this); }
 
-    public FuncBinding<TestExec, float, TestExec> funcBindingTest;
 
 
     [ContextMenu("Test")]

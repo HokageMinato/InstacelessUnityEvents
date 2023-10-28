@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -139,12 +139,105 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._methodName
+      value: GetRoundedValue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: actionBindingTest._methodName
+      value: Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0]._typeName
+      value: Tests, Test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
     - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
       propertyPath: funcBindingTest._args.Array.data[0].objectValue
       value: 
       objectReference: {fileID: 78079869}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 138350188}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetRounderdwrapper
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key0.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].gradientValue.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Tests, Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].animationCurveValue.m_PreInfinity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].animationCurveValue.m_PostInfinity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.data[0].animationCurveValue.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: ve.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5601892661534987629, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -191,10 +284,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7987432673066815318, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Sample
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+--- !u!114 &138350188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+  m_PrefabInstance: {fileID: 138350187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca4c1aad7803d24baa2dee15c123fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,13 +388,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -329,9 +436,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -365,21 +480,30 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1826722854
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._methodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092855496300317335, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+      propertyPath: funcBindingTest._args.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5601892661534987629, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -426,7 +550,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7987432673066815318, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
       propertyPath: m_Name
-      value: ArgumentTest
+      value: ArgumentBenchmarks
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09cc1f7ca32834d4ea1662246cd0105c, type: 3}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 963194228}
+  - {fileID: 705507995}
+  - {fileID: 138350187}
+  - {fileID: 1826722854}

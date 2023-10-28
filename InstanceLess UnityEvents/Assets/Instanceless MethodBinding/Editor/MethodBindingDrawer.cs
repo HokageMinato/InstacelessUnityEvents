@@ -16,27 +16,10 @@ namespace MethodBinding.EditorExtension
     {
 
         #region PRIVATE_VARS
-        private const string DebugMethodName = "";
+        private const string DebugMethodName = "$%$^#";
         private const string FUNC_STR = "FuncBinding";
         private static readonly GUIContent NALabel = new GUIContent("n/a");
-        private static readonly Dictionary<string, string> typeNameResolver = new Dictionary<string, string>
-        {
-            { "Boolean", "bool" },
-            { "Byte", "byte" },
-            { "SByte", "sbyte" },
-            { "Char", "char" },
-            { "Int16", "short" },
-            { "UInt16", "ushort" },
-            { "Int32", "int" },
-            { "UInt32", "uint" },
-            { "Int64", "long" },
-            { "UInt64", "ulong" },
-            { "Single", "float" },
-            { "Double", "double" },
-            { "Decimal", "decimal" },
-            { "String", "string" },
-            { "Object", "object" }
-        };
+        
         #endregion
 
         #region UNITY_CALLBAKCS
@@ -58,23 +41,23 @@ namespace MethodBinding.EditorExtension
             property.serializedObject.ApplyModifiedProperties();
 
 #if UNITY_2019_1_OR_NEWER
-            GUI.Box(position, "");
+           // GUI.Box(position, "");
 #else
-		GUI.Box(position, "", (GUIStyle)
-			"flow overlay box");
+		//GUI.Box(position, "", (GUIStyle)
+		//	"flow overlay box");
 #endif
 
-            position.y += 4;
+            //position.y += 4;
             
             property.serializedObject.Update();
             EditorGUI.BeginProperty(position, label, property);
 
-            EditorGUI.indentLevel++;
-            // Draw label
-            Rect pos = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-            EditorGUI.indentLevel--;
+            //EditorGUI.indentLevel++;
+            //// Draw label
+            //Rect pos = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+            //EditorGUI.indentLevel--;
 
-            Rect targetRect = new Rect(pos.x, pos.y, pos.width, EditorGUIUtility.singleLineHeight);
+            Rect targetRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             Type targetType;
 
             if (attribute != null && attribute is TargetConstraintAttribute)
@@ -88,43 +71,42 @@ namespace MethodBinding.EditorExtension
             targetType = GetClassTypeGenericArgument();
 
             int indent = EditorGUI.indentLevel;
-            EditorGUI.indentLevel++;
+            //EditorGUI.indentLevel++;
 
-            string selectedMethodName = GetSelectedMethodName(property);
-            Type[] argTypes = GetSelectedMethodArguments(property);
+            MethodInfo selectedMethod = GetMethodInfoOfSelectedMethod(targetType, GetSelectedMethodName(property), GetSelectedMethodArguments(property));
 
-            // Get active method
-            MethodInfo selectedMethod = GetMethodInfoOfSelectedMethod(targetType, selectedMethodName, argTypes);
-
-            Rect methodRect = new Rect(position.x, targetRect.max.y + EditorGUIUtility.standardVerticalSpacing, position.width, EditorGUIUtility.singleLineHeight);
-            // Method select button
-            Rect labelRect = EditorGUI.PrefixLabel(methodRect, GUIUtility.GetControlID(FocusType.Passive), new GUIContent("Dynamic Bind"));
+            Rect methodRect = new Rect(position.x, targetRect.y /*+ EditorGUIUtility.standardVerticalSpacing*/, position.width, EditorGUIUtility.singleLineHeight);
+            Rect labelRect = EditorGUI.PrefixLabel(methodRect, GUIUtility.GetControlID(FocusType.Keyboard), label);
+            
+           
             GUIContent methodlabel = GenerateMethodLabel(selectedMethod);
             if (EditorGUI.DropdownButton(labelRect, methodlabel, FocusType.Keyboard))
             {
                 DrawMethodDropdown(property, targetType);
             }
+
             if (selectedMethod != null)
             {
                 DrawMethodInputRect(position, property, selectedMethod, methodRect);
             }
+            else 
+            {
+                ResetMethod(property);
+            }
 
-            EditorGUI.indentLevel = indent;
+
+            //EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();
             property.serializedObject.ApplyModifiedProperties();
         }
 
         private Type[] GetSelectedMethodArguments(SerializedProperty property)
         {
-
-            // Get args
-
             return GetArgTypes(property.FindPropertyRelative(MethodBindingBase.ArgsName));
         }
 
         private static string GetSelectedMethodName(SerializedProperty property)
         {
-            // Get method name
             SerializedProperty selectedMethodProperty = property.FindPropertyRelative(MethodBindingBase.MethodName);
             string selectedMethodName = selectedMethodProperty.stringValue;
             return selectedMethodName;
@@ -143,53 +125,48 @@ namespace MethodBinding.EditorExtension
                 GUIContent argLabel = new GUIContent(ObjectNames.NicifyVariableName(activeParameters[i].Name));
 
                 EditorGUI.BeginChangeCheck();
-                switch ((Arg.ArgType)argProp.FindPropertyRelative(Arg.ArgTypeName).enumValueIndex)
+
+                var argType = (Arg.ArgType)argProp.FindPropertyRelative(Arg.ArgTypeName).enumValueIndex;
+
+                if (Arg.PropertyNameDictionary.ContainsKey(argType))
                 {
-                    case Arg.ArgType.Bool:
-                        EditorGUI.PropertyField(argRect, argProp.FindPropertyRelative(Arg.BoolValueName), argLabel);
-                        break;
-
-                    case Arg.ArgType.Int:
-                        EditorGUI.PropertyField(argRect, argProp.FindPropertyRelative(Arg.IntValueName), argLabel);
-                        break;
-
-                    case Arg.ArgType.Float:
-                        EditorGUI.PropertyField(argRect, argProp.FindPropertyRelative(Arg.FloatValueName), argLabel); ;
-                        break;
-
-                    case Arg.ArgType.String:
-                        EditorGUI.PropertyField(argRect, argProp.FindPropertyRelative(Arg.StringValueName), argLabel);
-                        break;
-
-                    case Arg.ArgType.Object:
-
-                        SerializedProperty typeProp = argProp.FindPropertyRelative(Arg.TypeName);
-                        SerializedProperty objProp = argProp.FindPropertyRelative(Arg.ObjectValueName);
-
-                        if (typeProp != null)
-                        {
-                            Type objType = Type.GetType(typeProp.stringValue, false);
-                            EditorGUI.BeginChangeCheck();
-
-                            Object obj = objProp.objectReferenceValue;
-                            obj = EditorGUI.ObjectField(argRect, argLabel, obj, objType, true);
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                objProp.objectReferenceValue = obj;
-                            }
-                        }
-                        else
-                        {
-                            EditorGUI.PropertyField(argRect, objProp, argLabel);
-                        }
-                        break;
+                    EditorGUI.PropertyField(argRect, argProp.FindPropertyRelative(Arg.PropertyNameDictionary[argType]), argLabel);
                 }
-                if (EditorGUI.EndChangeCheck())
+                else if (argType == Arg.ArgType.Object)
                 {
-                    property.FindPropertyRelative("dirty").boolValue = true;
+                    SerializedProperty typeProp = argProp.FindPropertyRelative(Arg.TypeName);
+                    SerializedProperty objProp = argProp.FindPropertyRelative(Arg.ObjectValueName);
+
+                    if (typeProp != null)
+                    {
+                        Type objType = Type.GetType(typeProp.stringValue, false);
+                        EditorGUI.BeginChangeCheck();
+
+                        Object obj = objProp.objectReferenceValue;
+                        obj = EditorGUI.ObjectField(argRect, argLabel, obj, objType, true);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            objProp.objectReferenceValue = obj;
+                        }
+                    }
+                    else
+                    {
+                        EditorGUI.PropertyField(argRect, objProp, argLabel);
+                    }
                 }
-                argRect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                else 
+                {
+                    EditorGUI.LabelField(position, $"Unsupported Type supplied at {property.name}");
+                }
+                
             }
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                property.FindPropertyRelative("dirty").boolValue = true;
+            }
+            argRect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+
         }
 
         #endregion
@@ -201,7 +178,11 @@ namespace MethodBinding.EditorExtension
             GUIContent methodlabel = NALabel;
 
             if (activeMethod != null)
-                methodlabel = new GUIContent($"{activeMethod.DeclaringType}.{activeMethod.Name}({GenerateParameterString(activeMethod.GetParameters())})");
+            {
+                //methodlabel = new GUIContent($"{activeMethod.DeclaringType.Name} -> {activeMethod.ReturnParameter.ParameterType.Name} {activeMethod.Name}({GenerateParameterString(activeMethod.GetParameters())})");
+                methodlabel = new GUIContent($"{activeMethod.ReturnParameter.ParameterType.Name} {activeMethod.Name}({GenerateParameterString(activeMethod.GetParameters())})");
+            }
+
 
             return methodlabel;
         }
@@ -263,11 +244,6 @@ namespace MethodBinding.EditorExtension
 
             Type[] genericTypes = GetGenericArgumentsWithoutClassType();
 
-
-
-            //TODO Need revisit for event!
-            // SerializableEventBase is always void return type
-
             if (IsFuncBinding())
             {
                 returnType = genericTypes[genericTypes.Length - 1];
@@ -294,17 +270,19 @@ namespace MethodBinding.EditorExtension
 
             MethodInfo[] methods = targetType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
 
-            Debug.Log(methods.FirstOrDefault(x => x.Name.Contains(DebugMethodName)) == null);
+
+            //Debug.Log(methods.FirstOrDefault(x => x.Name.Contains(DebugMethodName)) == null);
 
             for (int i = 0; i < methods.Length; i++)
             {
                 MethodInfo methodInfo = methods[i];
 
                 // Skip methods with wrong return type
+                
                 if (returnType != null && methodInfo.ReturnType != returnType)
                 {
                     if (methods[i].Name.Contains(DebugMethodName))
-                        Debug.Log("SKipped at return type mismatch");
+                        Debug.Log($"SKipped at return type mismatch rt{returnType.Name} -- mt{methodInfo.ReturnType}");
 
                     continue;
                 }
@@ -356,8 +334,7 @@ namespace MethodBinding.EditorExtension
                 string seqChe = ($"{argTy}-{sargTy} -- {methodInfo.Name}");
                 #endregion
 
-                if ((IsFuncBinding() && argTypes.Length == 0) ||
-                    !Enumerable.SequenceEqual(argTypes, parms))
+                if (!Enumerable.SequenceEqual(argTypes, parms))
                 {
                     if (methods[i].Name.Contains(DebugMethodName))
                         Debug.Log("SKipped at seqCheck" + seqChe);
@@ -402,15 +379,15 @@ namespace MethodBinding.EditorExtension
 
         private string GetCommonTypeName(string name)
         {
-            if (typeNameResolver.ContainsKey(name))
-                return typeNameResolver[name];
+            if (Arg.typeNameResolver.ContainsKey(name))
+                return Arg.typeNameResolver[name];
 
             return name;
         }
 
         private MethodInfo GetMethodInfoOfSelectedMethod(Type classType, string methodName, Type[] types)
         {
-            MethodInfo activeMethod = classType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static, null, CallingConventions.Any, types, null);
+            MethodInfo activeMethod = classType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, null, CallingConventions.Any, types, null);
             return activeMethod;
         }
 
@@ -427,7 +404,7 @@ namespace MethodBinding.EditorExtension
             return types;
         }
 
-        private void SetMethod(SerializedProperty property, /*UnityEngine.Object target,*/ MethodInfo methodInfo/*, bool dynamic*/)
+        private void SetMethod(SerializedProperty property, MethodInfo methodInfo)
         {
             SerializedProperty methodProp = property.FindPropertyRelative(MethodBindingBase.MethodName);
             methodProp.stringValue = methodInfo.Name;
@@ -444,6 +421,19 @@ namespace MethodBinding.EditorExtension
             property.serializedObject.ApplyModifiedProperties();
             property.serializedObject.Update();
         }
+
+        private void ResetMethod(SerializedProperty property) 
+        {
+            SerializedProperty methodProp = property.FindPropertyRelative(MethodBindingBase.MethodName);
+            methodProp.stringValue = string.Empty;
+
+            SerializedProperty argProp = property.FindPropertyRelative(MethodBindingBase.ArgsName);
+            argProp.arraySize = 0;
+            property.FindPropertyRelative("dirty").boolValue = true;
+            property.serializedObject.ApplyModifiedProperties();
+            property.serializedObject.Update();
+        }
+
         #endregion
 
         #region INNER_CLASS_DEFS
@@ -461,6 +451,6 @@ namespace MethodBinding.EditorExtension
             }
         }
         #endregion
-       
+
     }
 }
